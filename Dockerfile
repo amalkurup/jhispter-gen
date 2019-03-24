@@ -2,9 +2,8 @@ FROM ubuntu:cosmic
 
 RUN \
   # configure the "jhipster" user
-  groupadd jhipster && \
-  useradd jhipster -s /bin/bash -m -g jhipster -G sudo && \
-  echo 'jhipster:jhipster' |chpasswd && \
+  useradd jhipster -s /bin/bash -m -g root -G sudo && \
+  echo 'jhipster:root' |chpasswd && \
   mkdir /home/jhipster/app && \
   # install open-jdk 8
   apt-get update && \
@@ -51,7 +50,7 @@ RUN \
   # install jhipster
   npm install -g /home/jhipster/generator-jhipster && \
   # fix jhipster user permissions
-  chown -R jhipster:jhipster \
+  chown -R jhipster:root \
     /home/jhipster \
     /usr/local/lib/node_modules && \
   # cleanup
@@ -61,7 +60,7 @@ RUN \
     /tmp/* \
     /var/tmp/*
 	
-RUN chgrp -Rf root / && chmod -Rf g+w /
+RUN chmod -Rf g+w /
 
 # expose the working directory, the Tomcat port, the BrowserSync ports
 USER jhipster

@@ -62,7 +62,7 @@ RUN \
     /var/tmp/*
 	
 
-# expose the working directory, the Tomcat port, the BrowserSync ports
+#  expose the working directory, the Tomcat port, the BrowserSync ports
 USER root
 ENV PATH $PATH:/usr/bin:/home/jhipster/.yarn-global/bin:/home/jhipster/.yarn/bin:/home/jhipster/.config/yarn/global/node_modules/.bin
 WORKDIR "/home/jhipster/app"

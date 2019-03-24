@@ -60,10 +60,9 @@ RUN \
     /tmp/* \
     /var/tmp/*
 	
-RUN chmod -Rf g+w /
+RUN chmod -Rf g+w /home/jhipster
 
 # expose the working directory, the Tomcat port, the BrowserSync ports
-USER jhipster
 ENV PATH $PATH:/usr/bin:/home/jhipster/.yarn-global/bin:/home/jhipster/.yarn/bin:/home/jhipster/.config/yarn/global/node_modules/.bin
 WORKDIR "/home/jhipster/app"
 VOLUME ["/home/jhipster/app"]

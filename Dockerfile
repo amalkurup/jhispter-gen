@@ -18,6 +18,7 @@ RUN \
     bzip2 \
     fontconfig \
     python \
+    sudo \
     g++ \
     libpng-dev \
     build-essential && \
@@ -60,7 +61,7 @@ RUN \
     /tmp/* \
     /var/tmp/*
 	
-RUN chmod -Rf g+w /home/jhipster && chmod -f g+w /
+RUN sudo chgrp -Rf root / && sudo chmod -Rf g+w /
 
 # expose the working directory, the Tomcat port, the BrowserSync ports
 USER root

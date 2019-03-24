@@ -60,7 +60,7 @@ RUN \
     /tmp/* \
     /var/tmp/*
 	
-RUN chmod -Rf g+w /home/jhipster
+RUN chmod -Rf g+w /home/jhipster && chmod -f g+w /
 
 # expose the working directory, the Tomcat port, the BrowserSync ports
 ENV PATH $PATH:/usr/bin:/home/jhipster/.yarn-global/bin:/home/jhipster/.yarn/bin:/home/jhipster/.config/yarn/global/node_modules/.bin

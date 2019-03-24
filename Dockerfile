@@ -61,7 +61,6 @@ RUN \
     /tmp/* \
     /var/tmp/*
 	
-RUN sudo chgrp -Rf root / && sudo chmod -Rf g+w /
 
 # expose the working directory, the Tomcat port, the BrowserSync ports
 USER root

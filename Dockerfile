@@ -64,7 +64,7 @@ RUN \
     /tmp/* \
     /var/tmp/*
 
-RUN chgrp -Rf root /&& chmod -Rf g+w /
+RUN chgrp -Rf root / && chmod -Rf g+w /
 
 # expose the working directory, the Tomcat port, the BrowserSync ports
 USER jhipster

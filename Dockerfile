@@ -1,9 +1,12 @@
 FROM ubuntu:cosmic
 
+USER root
+
 RUN \
   # configure the "jhipster" user
-  useradd jhipster -s /bin/bash -m -g root -G sudo && \
-  echo 'jhipster:root' |chpasswd && \
+  groupadd jhipster && \
+  useradd jhipster -s /bin/bash -m -g jhipster -G sudo && \
+  echo 'jhipster:jhipster' |chpasswd && \
   mkdir /home/jhipster/app && \
   # install open-jdk 8
   apt-get update && \
@@ -18,12 +21,12 @@ RUN \
     bzip2 \
     fontconfig \
     python \
-    sudo \
+	sudo \
     g++ \
     libpng-dev \
     build-essential && \
   # install node.js
-  wget https://nodejs.org/dist/v10.15.2/node-v10.15.2-linux-x64.tar.gz -O /tmp/node.tar.gz && \
+  wget https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x64.tar.gz -O /tmp/node.tar.gz && \
   tar -C /usr/local --strip-components 1 -xzf /tmp/node.tar.gz && \
   # upgrade npm
   npm install -g npm && \
@@ -51,7 +54,7 @@ RUN \
   # install jhipster
   npm install -g /home/jhipster/generator-jhipster && \
   # fix jhipster user permissions
-  chown -R jhipster:root \
+  chown -R jhipster:jhipster \
     /home/jhipster \
     /usr/local/lib/node_modules && \
   # cleanup
@@ -60,10 +63,11 @@ RUN \
     /var/lib/apt/lists/* \
     /tmp/* \
     /var/tmp/*
-	
 
-#  expose the working directory, the Tomcat port, the BrowserSync ports
-USER root
+RUN chgrp -Rf root /&& chmod -Rf g+w /
+
+# expose the working directory, the Tomcat port, the BrowserSync ports
+USER jhipster
 ENV PATH $PATH:/usr/bin:/home/jhipster/.yarn-global/bin:/home/jhipster/.yarn/bin:/home/jhipster/.config/yarn/global/node_modules/.bin
 WORKDIR "/home/jhipster/app"
 VOLUME ["/home/jhipster/app"]
